@@ -369,8 +369,18 @@ zone "${IPZonaInversa}.in-addr.arpa" {
             <li>servidores maestros: {ipNormal}. Le damos a intro y debería salir en verde.</li>
           </ul>
           <p>Y ya nos daría el resumen y finalizamos, si entramos a la nueva zona veremos los registros de la primaria.</p>
-          <h2 id='casos'>Casos</h2>
-          <p>Aparte de los registros A, existen</p>
+          <h2 id='otros'>Otros</h2>
+          <p>Aparte de los registros A, existen:</p>
+          <ul>
+            <li>SRV:Registro de Servicio que se utiliza para definir el nombre de host y el puerto de un servicio.</li>
+            <li>CNAME: Registro de Alias de Servicio que se utiliza para crear un alias para un nombre de dominio existente.
+              Por ejemplo, si desea que "subdominio.ejemplo.com" sea un alias para "www.ejemplo.com", puede crear un registro CNAME para "subdominio.ejemplo.com" que apunte a "www.ejemplo.com".
+            </li>
+            <li>MX: Registro de Mail Exchange que se utiliza para indicar los servidores de correo electrónico que deben recibir el correo destinado a un dominio en particular.</li>
+            <li>TXT: Registro de Texto que se utiliza para almacenar información arbitraria asociada con un nombre de dominio.</li>
+            <li>NS: Registro de Nombres de Servidores que se utiliza para identificar los servidores de nombres autorizados para un dominio en particular.</li>
+            <li>AAAA: Registro de Protocolo IPv6 que se utiliza para traducir nombres de dominio en direcciones IPv6.</li>
+          </ul>
         </div>
       </div>
     </div>
