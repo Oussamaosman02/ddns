@@ -99,19 +99,13 @@ function App () {
             <br />
             dominio = {nombreDeDominio}
             <br />
-            ip normal = {ipNormal}
-            <br />
-            zona inversa = {ipInversa}
+            Ip del servidor principal = {ipNormal}
             <br />
             rango ip zona inversa = {IPZonaInversa}
             <br />
-            ip secundario = {ipSecundario}
+            ip del servidor secundario = {ipSecundario}
             <br />
-            secundario inversa = {secundarioInversa}
-            <br />
-            ip de maestre = {ipMaestre}
-            <br />
-            maestre inversa = {maestreInversa}
+            ip de otro, en este caso maestre = {ipMaestre}
             <br />
             mascara= {mascara}
             <br />
@@ -122,8 +116,7 @@ function App () {
           </p>
           <pre>
             <code className='language-yaml'>
-              {`
-network:
+              {`network:
   renderer: networkd
   version: 2
   ethernets:
@@ -147,16 +140,16 @@ network:
           <code className='language-bash'>ifconfig
           </code>
 
-          <p>instalamos el servidor dns:</p>
+          <p>Ahora instalamos el servidor dns:</p>
           <code className='language-bash'>sudo apt-get install bind9 -y
           </code>
 
-          <p>Dos carpetas son las importantes:</p>
+          <p>En cuanto al servidor DNS, dos carpetas son las importantes:</p>
           <ul>
             <li><code>/etc/bind/</code></li>
             <li><code>/var/cache/bind/</code></li>
           </ul>
-          <p>El archivo que vamos a modificar en el <code>/etc/bind/</code> es:</p>
+          <p>El archivo a modificar en el <code>/etc/bind/</code> es:</p>
           <ul>
             <li><code>named.conf.local</code></li>
           </ul>
@@ -171,7 +164,7 @@ network:
             </code>
           </pre>
 
-          <p>ahora podemos añadir, justo debajo de eso la zona inversa:</p>
+          <p>ahora podemos añadir, justo debajo de eso, la zona inversa:</p>
           <pre>
             <code className='language-conf'>
               {`zone "${IPZonaInversa}.in-addr.arpa" {
@@ -186,7 +179,7 @@ network:
           <code className='language-bash'>named-checkconf
           </code>
 
-          <p>Una vez esto, vamos a configurar el archivo de db, es decir, el <code>db.{nombreDeDominio}</code>, en <code>/var/cache/bind</code>. Debería quedar algo así:</p>
+          <p>Una vez eso, vamos a configurar el archivo de db que hemos indicado, es decir, el <code>db.{nombreDeDominio}</code>, en <code>/var/cache/bind</code>. Debería quedar algo así:</p>
           <pre>
             <code className='language-conf'>
 
@@ -233,11 +226,11 @@ ${maestreInversa}    IN  PTR   maestre.${nombreDeDominio}.
             </code>
           </pre>
           <p>Reiniciamos el servicio:</p>
-          <code className='language-bash'>sudo service bind9 restart
+          <code className='language-bash'>sudo service named restart
           </code>
 
           <p>También valdría con el siguiente:</p>
-          <code className='language-bash'>sudo service named restart
+          <code className='language-bash'>sudo service bind9 restart
           </code>
 
           <p>Ahora comprobamos que esté todo bien:</p>
@@ -257,7 +250,7 @@ ${maestreInversa}    IN  PTR   maestre.${nombreDeDominio}.
           </code>
 
           <h3 id='servidor-secundario-ubuntu'>Servidor secundario Ubuntu</h3>
-          <p>Para ello, tenemos que modificar las zonas para permitir la transferencia de autoridad, en el <code>named.conf.local</code> del <code>/etc/bind</code></p>
+          <p>Para ello, tenemos que modificar las zonas para permitir la transferencia de autoridad en el servidor primario, en el <code>named.conf.local</code> del <code>/etc/bind</code></p>
           <pre>
             <code className='language-conf'>
               {`zone "${nombreDeDominio}" {
@@ -285,8 +278,7 @@ zone "${IPZonaInversa}.in-addr.arpa" {
           <p>Ahora, nos vamos al servidor secundario e instalamos el <code>bind9</code> y configuramos el netplan:</p>
           <pre>
             <code className='language-yaml'>
-              {`
-network:
+              {`network:
   renderer: networkd
   version: 2
   ethernets:
@@ -343,10 +335,11 @@ zone "${IPZonaInversa}.in-addr.arpa" {
           <code className='language-bash'>sudo apt-get install resolvconf
           </code>
 
-          <p>Y editamos el archivo princiapl, el <code>/etc/resolvconf/resolv.conf/tail</code>:</p>
+          <p>Y editamos el archivo de cola, el <code>/etc/resolvconf/resolv.conf/tail</code>:</p>
           <pre>
-            <code className='language-conf'>nameserver {ipNormal}
-              {nombreDeDominio}
+            <code className='language-conf'>
+              {`nameserver ${ipNormal}
+search ${nombreDeDominio}`}
             </code>
           </pre>
           <p>Y actualizamos el <code>resolvconf</code>:</p>
