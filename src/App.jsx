@@ -32,7 +32,7 @@ function App () {
     } else {
       num = 1
     }
-    if (rv) {
+    if (!rv) {
       const inv = ip.split('.').slice(num).reverse().join('.')
       return inv
     } else {
