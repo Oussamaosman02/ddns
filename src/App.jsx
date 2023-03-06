@@ -25,7 +25,7 @@ function App () {
   function inversa (mascara, ip, rv) {
     let num
 
-    if (mascara === '24') {
+    if (mascara === '8') {
       num = 3
     } else if (mascara === '16') {
       num = 2
