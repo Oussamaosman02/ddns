@@ -33,10 +33,10 @@ function App () {
       num = 1
     }
     if (!rv) {
-      const inv = ip.split('.').slice(num).reverse().join('.')
+      const inv = ip.split('.').reverse().slice(num).join('.')
       return inv
     } else {
-      const inv = ip.split('.').slice(num).join('.')
+      const inv = ip.split('.').slice(num).reverse().join('.')
       return inv
     }
   }
