@@ -12,7 +12,7 @@ function App () {
   const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
   const [maestreInversa, setMaestreInversa] = useState('9.23')
   const [maestreNombre, setMaestreNombre] = useState('maestre')
-  const [mascara, setMascara] = useState('16')
+  const [mascara, setMascara] = useState('24')
 
   // formulario
   const ndominio = useRef()
@@ -26,13 +26,13 @@ function App () {
     let num
 
     if (mascara === '24') {
-      num = 3
+      num = 1
     } else if (mascara === '16') {
       num = 2
     } else {
-      num = 1
+      num = 3
     }
-    if (!rv) {
+    if (rv) {
       const inv = ip.split('.').slice(num).reverse().join('.')
       return inv
     } else {
