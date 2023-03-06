@@ -26,11 +26,11 @@ function App () {
     let num
 
     if (mascara === '24') {
-      num = 1
+      num = 3
     } else if (mascara === '16') {
       num = 2
     } else {
-      num = 3
+      num = 1
     }
     if (!rv) {
       const inv = ip.split('.').slice(num).reverse().join('.')
