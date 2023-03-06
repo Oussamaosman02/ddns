@@ -11,6 +11,7 @@ function App () {
   const [secundarioInversa, setSecundarioInversa] = useState('7.23')
   const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
   const [maestreInversa, setMaestreInversa] = useState('9.23')
+  const [maestreNombre, setMaestreNombre] = useState('maestre')
   const [mascara, setMascara] = useState('16')
 
   // formulario
@@ -19,6 +20,7 @@ function App () {
   const nservsec = useRef()
   const nservotro = useRef()
   const nmascara = useRef()
+  const nmaestre = useRef()
 
   function inversa (mascara, ip, rv) {
     let num
@@ -44,6 +46,7 @@ function App () {
     const servsec = nservsec.current.value
     const servotro = nservotro.current.value
     const mascara = nmascara.current.value
+    const maestre = nmaestre.current.value
 
     if (dominio && servpri && servsec && servotro && mascara) {
       const inv = inversa(mascara, servpri, true)
@@ -60,6 +63,7 @@ function App () {
       setIpInversa(invers)
       setSecundarioInversa(inverssec)
       setMaestreInversa(inversotro)
+      setMaestreNombre(maestre)
     } else {
       // eslint-disable-next-line no-undef
       alert('introduce todos los parámetros')
@@ -87,6 +91,7 @@ function App () {
             <input placeholder='nombre de dominio' ref={ndominio} />
             <input placeholder='ip servidor primario' ref={nservpri} />
             <input placeholder='ip servidor secundario' ref={nservsec} />
+            <input placeholder='nombre otro' ref={nmaestre} />
             <input placeholder='ip otro' ref={nservotro} />
             <input placeholder='mascara 8/16/24' ref={nmascara} />
             <button>Generar documentación</button>
@@ -105,7 +110,7 @@ function App () {
             <br />
             ip del servidor secundario = {ipSecundario}
             <br />
-            ip de otro, en este caso maestre = {ipMaestre}
+            ip de otro, en este caso {maestreNombre} = {ipMaestre}
             <br />
             mascara= {mascara}
             <br />
@@ -198,7 +203,7 @@ $TTL 3600;
 
 principal   IN  A   ${ipNormal}
 secundario  IN  A   ${ipSecundario}
-maestre     IN  A   ${ipMaestre}
+${maestreNombre}     IN  A   ${ipMaestre}
 `}
             </code>
           </pre>
@@ -220,7 +225,7 @@ $TTL 3600;
 
 ${ipInversa}    IN  PTR   principal.${nombreDeDominio}.
 ${secundarioInversa}    IN  PTR   secundario.${nombreDeDominio}.
-${maestreInversa}    IN  PTR   maestre.${nombreDeDominio}.
+${maestreInversa}    IN  PTR   ${maestreNombre}.${nombreDeDominio}.
 `}
 
             </code>
@@ -242,7 +247,7 @@ ${maestreInversa}    IN  PTR   maestre.${nombreDeDominio}.
           </code>
 
           <p>Y podemos ver si lo resuelve bien:</p>
-          <code className='language-bash'>nslookup maestre.{nombreDeDominio}
+          <code className='language-bash'>nslookup {maestreNombre}.{nombreDeDominio}
           </code>
 
           <p>o</p>
