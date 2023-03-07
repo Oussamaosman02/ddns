@@ -12,6 +12,8 @@ function App () {
   const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
   const [maestreInversa, setMaestreInversa] = useState('9.23')
   const [maestreNombre, setMaestreNombre] = useState('maestre')
+  const [ipFtp, setIpFtp] = useState('10.8.23.15')
+  const [ftpInversa, setFtpInversa] = useState('15.23')
   const [mascara, setMascara] = useState('16')
 
   // formulario
@@ -21,6 +23,7 @@ function App () {
   const nservotro = useRef()
   const nmascara = useRef()
   const nmaestre = useRef()
+  const nftp = useRef()
 
   function inversa (mascara, ip, rv) {
     let num
@@ -54,12 +57,14 @@ function App () {
     const servotro = nservotro.current.value
     const mascara = nmascara.current.value
     const maestre = nmaestre.current.value
+    const ftp = nftp.current.value
 
     if (dominio && servpri && servsec && servotro && mascara) {
       const inv = inversa(mascara, servpri, true)
       const invers = inversa(mascara, servpri)
       const inverssec = inversa(mascara, servsec)
       const inversotro = inversa(mascara, servotro)
+      const inversftp = inversa(mascara, ftp)
 
       setNombreDeDominio(dominio)
       setIpNormal(servpri)
@@ -71,6 +76,8 @@ function App () {
       setSecundarioInversa(inverssec)
       setMaestreInversa(inversotro)
       setMaestreNombre(maestre)
+      setFtpInversa(inversftp)
+      setIpFtp(ftp)
     } else {
       // eslint-disable-next-line no-undef
       alert('introduce todos los parámetros')
@@ -98,9 +105,10 @@ function App () {
             <input placeholder='nombre de dominio' ref={ndominio} />
             <input placeholder='ip servidor primario' ref={nservpri} />
             <input placeholder='ip servidor secundario' ref={nservsec} />
-            <input placeholder='nombre otro' ref={nmaestre} />
-            <input placeholder='ip otro' ref={nservotro} />
-            <input placeholder='mascara 8/16/24' ref={nmascara} />
+            <input placeholder='nombre otro host' ref={nmaestre} />
+            <input placeholder='ip otro host' ref={nservotro} />
+            <input placeholder='ip ftp' ref={nftp} />
+            <input placeholder='mascara 8-16-24' ref={nmascara} />
             <button>Generar documentación</button>
           </form>
         </div>
@@ -109,17 +117,19 @@ function App () {
           <p>
             Variables:
             <br />
-            dominio = {nombreDeDominio}
+            Dominio = {nombreDeDominio}
             <br />
             Ip del servidor principal = {ipNormal}
             <br />
-            rango ip zona inversa = {IPZonaInversa}
+            Rango IP zona inversa = {IPZonaInversa}
             <br />
-            ip del servidor secundario = {ipSecundario}
+            IP del servidor secundario = {ipSecundario}
             <br />
-            ip de otro, en este caso {maestreNombre} = {ipMaestre}
+            IP de otro host, en este caso {maestreNombre} = {ipMaestre}
             <br />
-            mascara= {mascara}
+            IP del servicio de ftp: {ipFtp}
+            <br />
+            Máscara= {mascara}
             <br />
           </p>
           <h2 id='dns-ubuntu'>DNS ubuntu</h2>
@@ -207,10 +217,11 @@ $TTL 3600;
     )
 
 @           IN  NS  principal.${nombreDeDominio}.
-
+            IN  SRV 0 0 21  ftp.${nombreDeDominio}.
 principal   IN  A   ${ipNormal}
 secundario  IN  A   ${ipSecundario}
-${maestreNombre}     IN  A   ${ipMaestre}
+${maestreNombre}  IN  A   ${ipMaestre}
+ftp         IN  A   ${ipFtp}
 `}
             </code>
           </pre>
@@ -230,9 +241,10 @@ $TTL 3600;
 
 @           IN  NS  principal.${nombreDeDominio}.
 
-${ipInversa}    IN  PTR   principal.${nombreDeDominio}.
+${ipInversa}   IN  PTR   principal.${nombreDeDominio}.
 ${secundarioInversa}    IN  PTR   secundario.${nombreDeDominio}.
 ${maestreInversa}    IN  PTR   ${maestreNombre}.${nombreDeDominio}.
+${ftpInversa}   IN  PTR   ftp.${nombreDeDominio}.
 `}
 
             </code>
