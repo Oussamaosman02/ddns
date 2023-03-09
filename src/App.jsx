@@ -11,7 +11,7 @@ function App () {
   const [secundarioInversa, setSecundarioInversa] = useState('7.23')
   const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
   const [maestreInversa, setMaestreInversa] = useState('9.23')
-  const [maestreNombre, setMaestreNombre] = useState('maestre')
+  const [maestreNombre, setMaestreNombre] = useState('ftp')
   const [ipFtp, setIpFtp] = useState('10.8.23.15')
   const [ftpInversa, setFtpInversa] = useState('15.23')
   const [mascara, setMascara] = useState('16')
