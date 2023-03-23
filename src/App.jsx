@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import inversa from '../components/fn/inversa'
+import Formulario from '../components/Formulario'
 
 function App () {
   const [nombreDeDominio, setNombreDeDominio] = useState('dominio.asir2')
@@ -12,52 +12,25 @@ function App () {
   const [secundarioInversa, setSecundarioInversa] = useState('7.23')
   const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
   const [maestreInversa, setMaestreInversa] = useState('9.23')
-  const [maestreNombre, setMaestreNombre] = useState('ftp')
+  const [maestreNombre, setMaestreNombre] = useState('maestre')
   const [ipFtp, setIpFtp] = useState('10.8.23.15')
   const [ftpInversa, setFtpInversa] = useState('15.23')
   const [mascara, setMascara] = useState('16')
 
   // formulario
-  const ndominio = useRef()
-  const nservpri = useRef()
-  const nservsec = useRef()
-  const nservotro = useRef()
-  const nmascara = useRef()
-  const nmaestre = useRef()
-  const nftp = useRef()
-
-  function handleSubmit () {
-    const dominio = ndominio.current.value
-    const servpri = nservpri.current.value
-    const servsec = nservsec.current.value
-    const servotro = nservotro.current.value
-    const mascara = nmascara.current.value
-    const maestre = nmaestre.current.value
-    const ftp = nftp.current.value
-
-    if (dominio && servpri && servsec && servotro && mascara) {
-      const inv = inversa(mascara, servpri, true)
-      const invers = inversa(mascara, servpri)
-      const inverssec = inversa(mascara, servsec)
-      const inversotro = inversa(mascara, servotro)
-      const inversftp = inversa(mascara, ftp)
-
-      setNombreDeDominio(dominio)
-      setIpNormal(servpri)
-      setIpSecundario(servsec)
-      setIpMaestre(servotro)
-      setMascara(mascara)
-      setIPZonaInversa(inv)
-      setIpInversa(invers)
-      setSecundarioInversa(inverssec)
-      setMaestreInversa(inversotro)
-      setMaestreNombre(maestre)
-      setFtpInversa(inversftp)
-      setIpFtp(ftp)
-    } else {
-      // eslint-disable-next-line no-undef
-      alert('introduce todos los parámetros')
-    }
+  function data ({ dominio, servpri, servsec, servotro, mascara, inv, invers, inverssec, inversotro, maestre, inversftp, ftp }) {
+    setNombreDeDominio(dominio)
+    setIpNormal(servpri)
+    setIpSecundario(servsec)
+    setIpMaestre(servotro)
+    setMascara(mascara)
+    setIPZonaInversa(inv)
+    setIpInversa(invers)
+    setSecundarioInversa(inverssec)
+    setMaestreInversa(inversotro)
+    setMaestreNombre(maestre)
+    setFtpInversa(inversftp)
+    setIpFtp(ftp)
   }
   return (
     <div className='App'>
@@ -72,21 +45,7 @@ function App () {
       <div className='texto'>
         <h1>Vite + React</h1>
         <div>
-          <form onSubmit={(e) => {
-            e.preventDefault()
-            handleSubmit()
-          }}
-          >
-            <h2>Introduce los datos</h2>
-            <input placeholder='nombre de dominio' ref={ndominio} />
-            <input placeholder='ip servidor primario' ref={nservpri} />
-            <input placeholder='ip servidor secundario' ref={nservsec} />
-            <input placeholder='nombre otro host' ref={nmaestre} />
-            <input placeholder='ip otro host' ref={nservotro} />
-            <input placeholder='ip ftp' ref={nftp} />
-            <input placeholder='mascara 8-16-24' ref={nmascara} />
-            <button>Generar documentación</button>
-          </form>
+          <Formulario data={data} />
         </div>
         <div className='card'>
           <h1 id='dns'>DNS</h1>

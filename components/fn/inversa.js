@@ -1,6 +1,5 @@
-function inversa (mascara, ip, rv) {
+const inversa = (mascara, ip, rv) => {
   let num
-
   if (!rv) {
     if (mascara === '24') {
       num = 3
@@ -24,4 +23,4 @@ function inversa (mascara, ip, rv) {
   }
 }
 
-export default inversa()
+export default inversa
