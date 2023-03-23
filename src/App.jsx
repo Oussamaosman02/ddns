@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
+import inversa from '../components/fn/inversa'
 
 function App () {
   const [nombreDeDominio, setNombreDeDominio] = useState('dominio.asir2')
@@ -25,31 +26,6 @@ function App () {
   const nmaestre = useRef()
   const nftp = useRef()
 
-  function inversa (mascara, ip, rv) {
-    let num
-
-    if (!rv) {
-      if (mascara === '24') {
-        num = 3
-      } else if (mascara === '16') {
-        num = 2
-      } else {
-        num = 1
-      }
-      const inv = ip.split('.').slice(num).reverse().join('.')
-      return inv
-    } else {
-      if (mascara === '8') {
-        num = 3
-      } else if (mascara === '16') {
-        num = 2
-      } else {
-        num = 1
-      }
-      const inv = ip.split('.').reverse().slice(num).join('.')
-      return inv
-    }
-  }
   function handleSubmit () {
     const dominio = ndominio.current.value
     const servpri = nservpri.current.value
