@@ -13,22 +13,35 @@ function Formulario ({ data }) {
   function handleSubmit (e) {
     e.preventDefault()
 
-    const dominio = ndominio.current.value
-    const servpri = nservpri.current.value
-    const servsec = nservsec.current.value
-    const servotro = nservotro.current.value
+    const nombreDeDominio = ndominio.current.value
+    const ipNormal = nservpri.current.value
+    const ipSecundario = nservsec.current.value
+    const ipMaestre = nservotro.current.value
     const mascara = nmascara.current.value
-    const maestre = nmaestre.current.value
-    const ftp = nftp.current.value
+    const maestreNombre = nmaestre.current.value
+    const ipFtp = nftp.current.value
 
-    if (dominio && servpri && servsec && servotro && mascara) {
-      const inv = inversa(mascara, servpri, true)
-      const invers = inversa(mascara, servpri)
-      const inverssec = inversa(mascara, servsec)
-      const inversotro = inversa(mascara, servotro)
-      const inversftp = inversa(mascara, ftp)
+    if (nombreDeDominio && ipNormal && ipSecundario && ipMaestre && mascara) {
+      const IPZonaInversa = inversa(mascara, ipNormal, true)
+      const ipInversa = inversa(mascara, ipNormal)
+      const secundarioInversa = inversa(mascara, ipSecundario)
+      const maestreInversa = inversa(mascara, ipMaestre)
+      const ftpInversa = inversa(mascara, ipFtp)
 
-      const result = { dominio, servpri, servsec, servotro, mascara, inv, invers, inverssec, inversotro, maestre, inversftp, ftp }
+      const result = {
+        nombreDeDominio,
+        ipNormal,
+        ipSecundario,
+        ipMaestre,
+        mascara,
+        ipInversa,
+        IPZonaInversa,
+        secundarioInversa,
+        maestreInversa,
+        maestreNombre,
+        ftpInversa,
+        ipFtp
+      }
       data(result)
     } else {
       // eslint-disable-next-line no-undef
@@ -37,7 +50,7 @@ function Formulario ({ data }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} aria-label='form'>
       <h2>Introduce los datos</h2>
       <input placeholder='nombre de dominio' ref={ndominio} />
       <input placeholder='ip servidor primario' ref={nservpri} />

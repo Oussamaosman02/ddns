@@ -4,33 +4,51 @@ import './App.css'
 import Formulario from '../components/Formulario'
 
 function App () {
-  const [nombreDeDominio, setNombreDeDominio] = useState('dominio.asir2')
-  const [ipNormal, setIpNormal] = useState('10.8.23.5')
-  const [ipInversa, setIpInversa] = useState('5.23')
-  const [IPZonaInversa, setIPZonaInversa] = useState('8.10')
-  const [ipSecundario, setIpSecundario] = useState('10.8.23.7')
-  const [secundarioInversa, setSecundarioInversa] = useState('7.23')
-  const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
-  const [maestreInversa, setMaestreInversa] = useState('9.23')
-  const [maestreNombre, setMaestreNombre] = useState('maestre')
-  const [ipFtp, setIpFtp] = useState('10.8.23.15')
-  const [ftpInversa, setFtpInversa] = useState('15.23')
-  const [mascara, setMascara] = useState('16')
-
+  const [dns, setDns] = useState(
+    {
+      nombreDeDominio: 'dominio.asir2',
+      ipNormal: '10.8.23.5',
+      ipInversa: '5.23',
+      IPZonaInversa: '8.10',
+      ipSecundario: '10.8.23.7',
+      secundarioInversa: '7.23',
+      ipMaestre: '10.8.23.9',
+      maestreInversa: '9.23',
+      maestreNombre: 'maestre',
+      ipFtp: '10.8.23.15',
+      ftpInversa: '15.23',
+      mascara: '16'
+    }
+  )
+  // const [nombreDeDominio, setNombreDeDominio] = useState('dominio.asir2')
+  // const [ipNormal, setIpNormal] = useState('10.8.23.5')
+  // const [ipInversa, setIpInversa] = useState('5.23')
+  // const [IPZonaInversa, setIPZonaInversa] = useState('8.10')
+  // const [ipSecundario, setIpSecundario] = useState('10.8.23.7')
+  // const [secundarioInversa, setSecundarioInversa] = useState('7.23')
+  // const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
+  // const [maestreInversa, setMaestreInversa] = useState('9.23')
+  // const [maestreNombre, setMaestreNombre] = useState('maestre')
+  // const [ipFtp, setIpFtp] = useState('10.8.23.15')
+  // const [ftpInversa, setFtpInversa] = useState('15.23')
+  // const [mascara, setMascara] = useState('16')
+  const {
+    nombreDeDominio,
+    ipNormal,
+    ipInversa,
+    IPZonaInversa,
+    ipSecundario,
+    secundarioInversa,
+    ipMaestre,
+    maestreInversa,
+    maestreNombre,
+    ipFtp,
+    ftpInversa,
+    mascara
+  } = dns
   // formulario
-  function data ({ dominio, servpri, servsec, servotro, mascara, inv, invers, inverssec, inversotro, maestre, inversftp, ftp }) {
-    setNombreDeDominio(dominio)
-    setIpNormal(servpri)
-    setIpSecundario(servsec)
-    setIpMaestre(servotro)
-    setMascara(mascara)
-    setIPZonaInversa(inv)
-    setIpInversa(invers)
-    setSecundarioInversa(inverssec)
-    setMaestreInversa(inversotro)
-    setMaestreNombre(maestre)
-    setFtpInversa(inversftp)
-    setIpFtp(ftp)
+  function data (result) {
+    setDns(result)
   }
   return (
     <div className='App'>
