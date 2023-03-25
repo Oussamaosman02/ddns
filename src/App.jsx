@@ -20,18 +20,6 @@ function App () {
       mascara: '16'
     }
   )
-  // const [nombreDeDominio, setNombreDeDominio] = useState('dominio.asir2')
-  // const [ipNormal, setIpNormal] = useState('10.8.23.5')
-  // const [ipInversa, setIpInversa] = useState('5.23')
-  // const [IPZonaInversa, setIPZonaInversa] = useState('8.10')
-  // const [ipSecundario, setIpSecundario] = useState('10.8.23.7')
-  // const [secundarioInversa, setSecundarioInversa] = useState('7.23')
-  // const [ipMaestre, setIpMaestre] = useState('10.8.23.9')
-  // const [maestreInversa, setMaestreInversa] = useState('9.23')
-  // const [maestreNombre, setMaestreNombre] = useState('maestre')
-  // const [ipFtp, setIpFtp] = useState('10.8.23.15')
-  // const [ftpInversa, setFtpInversa] = useState('15.23')
-  // const [mascara, setMascara] = useState('16')
   const {
     nombreDeDominio,
     ipNormal,
