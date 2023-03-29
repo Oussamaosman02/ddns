@@ -52,14 +52,14 @@ function Formulario ({ data }) {
   return (
     <form onSubmit={handleSubmit} aria-label='form'>
       <h2>Introduce los datos</h2>
-      <input placeholder='nombre de dominio' ref={ndominio} />
-      <input placeholder='ip servidor primario' ref={nservpri} />
-      <input placeholder='ip servidor secundario' ref={nservsec} />
-      <input placeholder='nombre otro host' ref={nmaestre} />
-      <input placeholder='ip otro host' ref={nservotro} />
-      <input placeholder='ip ftp' ref={nftp} />
-      <input placeholder='mascara 8-16-24' ref={nmascara} />
-      <button>Generar documentación</button>
+      <input placeholder='Nombre de dominio' ref={ndominio} />
+      <input placeholder='IP servidor primario' ref={nservpri} />
+      <input placeholder='IP servidor secundario' ref={nservsec} />
+      <input placeholder='Nombre otro host' ref={nmaestre} />
+      <input placeholder='IP otro host' ref={nservotro} />
+      <input placeholder='IP ftp' ref={nftp} />
+      <input placeholder='Máscara 8-16-24' ref={nmascara} />
+      <button>Generar tutorial</button>
     </form>
   )
 }

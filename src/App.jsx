@@ -51,6 +51,7 @@ function App () {
       <div className='texto'>
         <h1>Vite + React</h1>
         <div>
+          Genera tu tutorial de DNS personalizado:
           <Formulario data={data} />
         </div>
         <div className='card'>
